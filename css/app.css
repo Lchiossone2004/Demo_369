@@ -1,0 +1,193 @@
+/* Global variables */
+:root {
+    --bg-color: #ffffff;
+    --overlay-opacity: 0.5;
+    --border-radius: 1.25rem;
+    --transition-fast: 0.3s ease;
+    --transition-slow: 1.5s ease-out;
+    --font-main: "Bungee", sans-serif;
+    --text-color: #fff;
+    --button-bg: #fff;
+    --button-hover-bg: gray;
+}
+
+/* Light reet and ox-sizing */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+/* Page loading transition */
+body {
+    background-color: var(--bg-color);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+body.ready {
+    opacity: 1;
+}
+
+/* Main container */
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 18.75rem;   
+    height: 37.5rem;   
+    perspective: 1000px;
+    background-color: black;
+    overflow: hidden;
+    min-height: 18.75rem;
+}
+
+/* Candidate box */
+.box {
+    position: relative;
+    width: 18.75rem;
+    height: 18.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background: transparent;
+    transition: filter var(--transition-fast), opacity var(--transition-fast);
+}
+.box:hover {
+    /* filter: brightness(1.2) saturate(1.2); */
+    border: 2px solid white;
+    cursor: pointer;
+}
+.box.no-hover:hover {
+    /* filter: none; */
+    border: none;
+    cursor: default;
+}
+
+/* Color overlay depending on the percentage */
+.fill-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    opacity: var(--overlay-opacity);
+    z-index: 1;
+    transition: width var(--transition-slow);
+}
+
+/* Background image */
+.image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 12.5rem; 
+    background-color: #ccc;
+    filter: blur(0);
+}
+
+/* Content on top of the image */
+.box-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 0.9375rem;
+    z-index: 5;
+}
+
+/* Candidate name */
+.candidate-text {
+    font-family: var(--font-main);
+    font-size: 2.5rem; 
+    color: var(--text-color);
+    z-index: 5;
+}
+
+/* Percentage and votes */
+.vote-percentage,
+.num-votes {
+    font-family: var(--font-main);
+    color: var(--text-color);
+    margin-top: 1.875rem;
+    z-index: 5;
+}
+.vote-percentage {
+font-size: 3.125rem;
+}
+.num-votes {
+    font-size: 1.25rem; 
+    margin-top: 0.5rem;
+}
+
+/* View button*/
+.button {
+    background: var(--button-bg);
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    font-family: sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1.25rem;
+    transition: background-color var(--transition-fast);
+}
+.button:hover,
+.button:focus-visible {
+    background: var(--button-hover-bg);
+}
+.button:focus-visible {
+    outline: 3px solid var(--text-color);
+    outline-offset: 2px;
+}
+
+/*States after voting*/
+.dull {
+    filter: grayscale(5%) brightness(0.95) saturate(0.95);
+    opacity: 0.8;
+    transition: filter var(--transition-fast), opacity var(--transition-fast);
+}
+.bright {
+    filter: brightness(1.1) saturate(1.1);
+    transition: filter var(--transition-fast);
+}
+
+/* Divider with the text between candidates */
+.divider {
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: var(--font-main);
+    color: var(--text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0; 
+    opacity: 1;
+    text-align: center; 
+    margin: 0 auto;
+    display: block; 
+}
+  
+.typewriter {
+  animation: typing 1.5s steps(20, end) forwards, step-end infinite;
+}
+  
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
